@@ -1,7 +1,6 @@
 package com.uzb_khiva.gazon_2.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -88,7 +87,7 @@ fun SavedPlacesItem(
                     .fillMaxHeight(0.6f)
                     .clip(RoundedCornerShape(5.dp)),
                 model = ImageRequest.Builder(context)
-                    .data(placed.imageUrl)
+                    .data(placed.imageList[0])
                     .crossfade(true)
                     .build(),
                 placeholder = painterResource(id = R.drawable.ic_downloading),

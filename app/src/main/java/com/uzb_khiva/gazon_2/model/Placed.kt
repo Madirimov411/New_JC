@@ -5,6 +5,9 @@ data class Placed(
     val maydonNomi: String,
     val manzil: String,
     val sana:String,
-    val imageUrl: String
+    val vaqt:String,
+    val rate:String,
+    val narx:String,
+    val imageList: List<String>
 )
 
