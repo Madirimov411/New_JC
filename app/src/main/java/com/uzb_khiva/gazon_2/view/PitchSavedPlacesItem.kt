@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -52,6 +53,9 @@ import coil.request.ImageRequest
 import com.uzb_khiva.gazon_2.R
 import com.uzb_khiva.gazon_2.model.Placed
 import com.uzb_khiva.gazon_2.ui.theme.LightGray
+import com.uzb_khiva.gazon_2.util.fontGilroyLight
+import com.uzb_khiva.gazon_2.util.fontGilroyMedium
+import com.uzb_khiva.gazon_2.util.fontGilroySemiBold
 import com.uzb_khiva.gazon_2.util.placeds
 import kotlinx.coroutines.launch
 
@@ -78,7 +82,7 @@ fun PitchSavedPlacesItem(
         modifier = modifier
             .fillMaxWidth()
             .height(192.dp)
-            .padding(start = 15.dp, end = 15.dp, bottom = 15.dp)
+            .padding(start = 15.dp, end = 15.dp, top = 15.dp)
             .shadow(
                 elevation = 20.dp,
                 shape = RoundedCornerShape(15.dp),
@@ -105,8 +109,9 @@ fun PitchSavedPlacesItem(
 
                 HorizontalPager(
                     state = pagerState,
-                    userScrollEnabled = false
                 ) { index ->
+
+                    pagerIndex.intValue = pagerState.currentPage
 
                     AsyncImage(
                         modifier = Modifier
@@ -137,7 +142,7 @@ fun PitchSavedPlacesItem(
                             .clip(RoundedCornerShape(15.dp))
                             .background(
                                 if (pagerIndex.intValue == 0) Color.Transparent else Color(
-                                    0x4DFFFFFF
+                                    0x73FFFFFF
                                 )
                             )
                             .padding(5.dp)
@@ -163,7 +168,7 @@ fun PitchSavedPlacesItem(
                             .clip(RoundedCornerShape(15.dp))
                             .background(
                                 if (pagerIndex.intValue == pageCount - 1) Color.Transparent else Color(
-                                    0x4DFFFFFF
+                                    0x73FFFFFF
                                 )
                             )
                             .padding(5.dp)
@@ -196,7 +201,9 @@ fun PitchSavedPlacesItem(
             ) {
 
                 Icon(
-                    modifier = Modifier.align(Alignment.End),
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .size(15.dp),
                     painter = painterResource(id = R.drawable.ic_bookmark),
                     contentDescription = null,
                     tint = LightGray
@@ -206,11 +213,13 @@ fun PitchSavedPlacesItem(
                     text = placed.maydonNomi,
                     modifier = Modifier.fillMaxWidth(),
                     style = TextStyle(
-                        fontSize = 16.sp,
+                        fontSize = 14.sp,
                         color = LightGray,
-                        fontWeight = FontWeight(600)
+                        fontFamily = fontGilroySemiBold()
                     )
                 )
+
+                Spacer(modifier = Modifier.height(10.dp))
 
                 Row(
                     modifier = Modifier
@@ -228,30 +237,36 @@ fun PitchSavedPlacesItem(
                     Text(
                         text = placed.rate,
                         style = TextStyle(
-                            fontSize = 16.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight(400),
                             color = LightGray
                         )
                     )
                 }
 
+                Spacer(modifier = Modifier.height(5.dp))
+
                 Text(
                     text = placed.vaqt,
                     style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight(400),
-                        color = LightGray
+                        fontSize = 14.sp,
+                        color = LightGray,
+                        fontFamily = fontGilroyLight()
                     )
                 )
+
+                Spacer(modifier = Modifier.height(15.dp))
 
                 Text(
                     text = "${placed.narx}/hr",
                     style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight(600),
+                        fontSize = 14.sp,
+                        fontFamily = fontGilroySemiBold(),
                         color = LightGray
                     )
                 )
+
+                Spacer(modifier = Modifier.height(5.dp))
 
                 Row(
                     modifier = Modifier
@@ -260,8 +275,13 @@ fun PitchSavedPlacesItem(
                 ) {
 
                     ButtonCard(
-                        modifier = Modifier.fillMaxWidth(.7f),
-                        title = "Book now"
+                        modifier = Modifier.fillMaxWidth(.75f),
+                        title = "Book now",
+                        textStyle = TextStyle(
+                            fontSize = 14.sp,
+                            color = Color.White,
+                            fontFamily = fontGilroySemiBold()
+                        )
                     ) {
                         //TODO
                         onBookNowClick(placed.id)
@@ -272,7 +292,9 @@ fun PitchSavedPlacesItem(
                         modifier = Modifier.fillMaxWidth(.7f),
                         image = R.drawable.ic_earth,
                     ) {
-
+                        //TODO
+                        onLocationClick(placed.id)
+                        Toast.makeText(context, "Location", Toast.LENGTH_SHORT).show()
                     }
 
 

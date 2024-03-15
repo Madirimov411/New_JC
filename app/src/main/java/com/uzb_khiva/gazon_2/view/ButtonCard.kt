@@ -40,6 +40,7 @@ import com.uzb_khiva.gazon_2.ui.theme.LightBlue
 fun ButtonCard(
     modifier: Modifier = Modifier,
     title: String? = null,
+    textStyle: TextStyle? = null,
     icon: ImageVector? = null,
     @DrawableRes
     image: Int? = null,
@@ -98,11 +99,12 @@ fun ButtonCard(
 
                 Text(
                     text = title,
-                    style = TextStyle(
-                        color = Color.White,
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight(500)
-                    )
+                    style = textStyle
+                        ?: TextStyle(
+                            color = Color.White,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight(500)
+                        )
                 )
             }
 
