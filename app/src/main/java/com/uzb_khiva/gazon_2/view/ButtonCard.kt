@@ -1,6 +1,7 @@
 package com.uzb_khiva.gazon_2.view
 
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,8 +38,10 @@ import com.uzb_khiva.gazon_2.ui.theme.LightBlue
 @Composable
 fun ButtonCard(
     modifier: Modifier = Modifier,
-    title: String,
-    image: ImageVector? = null,
+    title: String? = null,
+    icon: ImageVector? = null,
+    @DrawableRes
+    image: Int? = null,
     onClick: () -> Unit
 ) {
 
@@ -64,9 +68,18 @@ fun ButtonCard(
             horizontalArrangement = Arrangement.Center
         ) {
 
+            if (icon != null) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+
             if (image != null) {
                 Icon(
-                    imageVector = image,
+                    painter = painterResource(id = image),
                     contentDescription = null,
                     tint = Color.White,
                     modifier = Modifier.size(24.dp)
@@ -75,14 +88,16 @@ fun ButtonCard(
 
             Spacer(modifier = Modifier.width(5.dp))
 
-            Text(
-                text = title,
-                style = TextStyle(
-                    color = Color.White,
-                    fontSize = 10.sp,
-                    fontWeight = FontWeight(500)
+            if (title != null) {
+                Text(
+                    text = title,
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight(500)
+                    )
                 )
-            )
+            }
 
         }
 
@@ -107,7 +122,7 @@ fun ButtonCardPreview() {
 
         ButtonCard(
             title = "Add card",
-            image = Icons.Default.Add
+            icon = Icons.Default.Add
         ) {
             Toast.makeText(context, "Add card", Toast.LENGTH_SHORT).show()
         }

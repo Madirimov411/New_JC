@@ -2,6 +2,7 @@
 
 package com.uzb_khiva.gazon_2.view
 
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,9 +24,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -39,8 +42,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.uzb_khiva.gazon_2.R
@@ -74,7 +80,7 @@ fun PitchSavedPlacesItem(
             .height(192.dp)
             .padding(start = 15.dp, end = 15.dp, bottom = 15.dp)
             .shadow(
-                elevation = 8.dp,
+                elevation = 20.dp,
                 shape = RoundedCornerShape(15.dp),
                 spotColor = LightGray
             ),
@@ -186,8 +192,86 @@ fun PitchSavedPlacesItem(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f)
+                    .padding(top = 8.dp, end = 8.dp, bottom = 8.dp)
             ) {
-                //TODO
+
+                Icon(
+                    modifier = Modifier.align(Alignment.End),
+                    painter = painterResource(id = R.drawable.ic_bookmark),
+                    contentDescription = null,
+                    tint = LightGray
+                )
+
+                Text(
+                    text = placed.maydonNomi,
+                    modifier = Modifier.fillMaxWidth(),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        color = LightGray,
+                        fontWeight = FontWeight(600)
+                    )
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
+                    Icon(
+                        modifier = Modifier.size(18.dp),
+                        imageVector = Icons.Filled.Star,
+                        contentDescription = "Star",
+                        tint = LightGray
+                    )
+
+                    Text(
+                        text = placed.rate,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight(400),
+                            color = LightGray
+                        )
+                    )
+                }
+
+                Text(
+                    text = placed.vaqt,
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(400),
+                        color = LightGray
+                    )
+                )
+
+                Text(
+                    text = "${placed.narx}/hr",
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight(600),
+                        color = LightGray
+                    )
+                )
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+
+                    ButtonCard(
+                        modifier = Modifier.fillMaxWidth(.7f),
+                        title = "Book now"
+                    ) {
+                        //TODO
+                        onBookNowClick(placed.id)
+                        Toast.makeText(context, "Book now", Toast.LENGTH_SHORT).show()
+                    }
+
+
+                }
+
+
             }
 
         }
