@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.uzb_khiva.gazon_2.R
 import com.uzb_khiva.gazon_2.ui.theme.LightBlue
 
 @Composable
@@ -84,11 +85,17 @@ fun ButtonCard(
                     tint = Color.White,
                     modifier = Modifier.size(24.dp)
                 )
+
             }
 
-            Spacer(modifier = Modifier.width(5.dp))
+
 
             if (title != null) {
+
+                if (icon != null || image != null) {
+                    Spacer(modifier = Modifier.width(5.dp))
+                }
+
                 Text(
                     text = title,
                     style = TextStyle(
@@ -131,6 +138,14 @@ fun ButtonCardPreview() {
 
         ButtonCard(
             title = "Go to order"
+        ) {
+            Toast.makeText(context, "Go to order", Toast.LENGTH_SHORT).show()
+        }
+
+        Spacer(modifier = Modifier.height(150.dp))
+
+        ButtonCard(
+            image = R.drawable.ic_earth
         ) {
             Toast.makeText(context, "Go to order", Toast.LENGTH_SHORT).show()
         }

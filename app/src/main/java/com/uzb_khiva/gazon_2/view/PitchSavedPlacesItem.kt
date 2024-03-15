@@ -268,6 +268,13 @@ fun PitchSavedPlacesItem(
                         Toast.makeText(context, "Book now", Toast.LENGTH_SHORT).show()
                     }
 
+                    ButtonCard(
+                        modifier = Modifier.fillMaxWidth(.7f),
+                        image = R.drawable.ic_earth,
+                    ) {
+
+                    }
+
 
                 }
 
